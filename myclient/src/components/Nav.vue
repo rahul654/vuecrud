@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <router-link to="/">Blogs</router-link>
+      <router-link class="nav-item" to="/">Blogs</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -63,4 +63,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.nav-item {
+  margin: 0 50px 0 0;
+}
+</style>
