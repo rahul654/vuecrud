@@ -102,7 +102,6 @@ export default {
         }),
       });
       const data = await res.json();
-      console.log(data);
       if (data?.error) {
         this.errors = true;
         this.errorMsg = data?.error;

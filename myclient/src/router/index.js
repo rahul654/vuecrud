@@ -4,6 +4,7 @@ import Signup from '../components/Signup.vue'
 import Login from '../components/Login.vue'
 import NewPost from '../components/NewPost.vue'
 import UpdatePost from '../components/UpdatePost.vue'
+import AddComment from '../components/AddComment.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/updatepost/:id',
     name: 'updatepost',
     component: UpdatePost
+  },
+  {
+    path: '/addcomment/:id',
+    name: 'addcomment',
+    component: AddComment
   }
 ]
 

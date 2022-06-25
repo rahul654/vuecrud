@@ -85,7 +85,6 @@ export default {
         }),
       });
       const data = await res.json();
-      console.log(data);
       if (data?.errors) {
         this.errors = true;
         this.errorMsg = data?.errors[0]?.msg;
@@ -98,7 +97,6 @@ export default {
         localStorage.setItem("token", `Bearer ${data?.token}`);
         this.$router.push("/");
       }
-      console.log(this.errors, this.errorMsg);
     },
   },
 };

@@ -85,7 +85,6 @@ export default {
         }),
       });
       const data = await res.json();
-      console.log(data);
       if (data?.Error) {
         this.errors = true;
         this.errorMsg = data?.Error;

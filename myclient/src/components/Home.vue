@@ -25,18 +25,32 @@
           <p class="card-text">
             {{ post.content }}
           </p>
-          <a
-            @click="update_post(post._id)"
-            style="cursor: pointer"
-            class="card-link"
-            >Edit</a
-          >
-          <a
-            @click="delete_post(post._id)"
-            style="cursor: pointer"
-            class="card-link"
-            >Delete</a
-          >
+          <div v-if="post.postedBy === getUserName">
+            <a
+              @click="update_post(post._id)"
+              style="cursor: pointer"
+              class="card-link"
+              >Edit</a
+            >
+            <a
+              @click="delete_post(post._id)"
+              style="cursor: pointer"
+              class="card-link"
+              >Delete</a
+            >
+          </div>
+          <div>
+            <a
+              @click="addcomment(post._id)"
+              style="cursor: pointer"
+              class="card-link"
+              >Comment</a
+            >
+          </div>
+          <div>
+            Posted By :
+            {{ post.postedBy === getUserName ? "you" : post.postedBy }}
+          </div>
         </div>
       </div>
     </div>
@@ -59,7 +73,6 @@ export default {
   methods: {
     delete_post: async (post_id) => {
       let posts = store.state.posts;
-      console.log(post_id, posts, posts.length, posts?.[0]);
 
       const token = localStorage.getItem("token");
       await fetch(`http://localhost:5000/api/post/${post_id}`, {
@@ -75,6 +88,9 @@ export default {
     },
     update_post: (post_id) => {
       router.push(`/updatepost/${post_id}`);
+    },
+    addcomment: (post_id) => {
+      router.push(`/addcomment/${post_id}`);
     },
   },
 
@@ -116,9 +132,6 @@ export default {
     }
   },
   computed: {
-    // myPosts() {
-    //   return getPosts;
-    // },
     ...mapGetters({
       getPosts: "getPosts",
       getUserName: "getUserName",

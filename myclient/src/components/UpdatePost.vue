@@ -97,7 +97,6 @@ export default {
       },
     });
     const data = await res.json();
-    console.log(data);
     this.title = data?.title;
     this.category = data?.category;
     this.content = data?.content;
@@ -121,7 +120,6 @@ export default {
         }),
       });
       const data = await res.json();
-      console.log(data);
       if (data?.error) {
         this.errors = true;
         this.errorMsg = data?.error;
