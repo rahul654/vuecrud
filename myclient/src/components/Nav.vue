@@ -7,9 +7,7 @@
       <router-link :class="[navActive('/login') ? 'active' : '']" to="/login"
         >Login</router-link
       >
-      <a href="javascript:void(0);" class="icon" @click="myFunction()">
-        Navbar
-      </a>
+      <a class="icon" @click="myFunction()"> Navbar </a>
     </div>
     <div v-else class="topnav" id="myTopnav">
       <router-link :class="[navActive('/') ? 'active' : '']" to="/"
@@ -21,9 +19,7 @@
         >New Post</router-link
       >
       <router-link @click="logout" to="#">Logout</router-link>
-      <a href="javascript:void(0);" class="icon" @click="myFunction()">
-        Navbar
-      </a>
+      <a class="icon" @click="myFunction()"> Navbar </a>
     </div>
   </div>
 </template>
@@ -105,6 +101,7 @@ body {
 }
 
 .topnav .icon {
+  cursor: pointer;
   display: none;
 }
 
