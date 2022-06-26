@@ -1,38 +1,31 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <router-link class="nav-item" to="/">Blogs</router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+  <div>
+    <div v-if="isLoggedIn" class="topnav" id="myTopnav">
+      <router-link :class="[navActive('/signup') ? 'active' : '']" to="/signup"
+        >Signup</router-link
       >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul v-if="isLoggedIn" class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/login">Login</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/signup">Signup</router-link>
-          </li>
-        </ul>
-        <ul v-else class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/newpost">New Post</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link @click="logout" to="#">Logout</router-link>
-          </li>
-        </ul>
-      </div>
+      <router-link :class="[navActive('/login') ? 'active' : '']" to="/login"
+        >Login</router-link
+      >
+      <a href="javascript:void(0);" class="icon" @click="myFunction()">
+        Navbar
+      </a>
     </div>
-  </nav>
+    <div v-else class="topnav" id="myTopnav">
+      <router-link :class="[navActive('/') ? 'active' : '']" to="/"
+        >Blogs</router-link
+      >
+      <router-link
+        :class="[navActive('/newpost') ? 'active' : '']"
+        to="/newpost"
+        >New Post</router-link
+      >
+      <router-link @click="logout" to="#">Logout</router-link>
+      <a href="javascript:void(0);" class="icon" @click="myFunction()">
+        Navbar
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -44,6 +37,20 @@ export default {
     },
   },
   methods: {
+    myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    },
+    navActive(path) {
+      return this.$router.currentRoute._rawValue.fullPath === path
+        ? true
+        : false;
+    },
+
     async logout() {
       const token = localStorage.getItem("token");
       localStorage.removeItem("token");
@@ -63,8 +70,67 @@ export default {
 };
 </script>
 
-<style>
-.nav-item {
+<style scoped>
+/* .nav-item {
   margin: 0 50px 0 0;
+} */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 </style>
